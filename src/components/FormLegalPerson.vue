@@ -18,9 +18,17 @@
         <input type="text" id="phone" name="phone" v-model="phone" placeholder="Telefone">
       </div>
 
-      <div class="input-container-btn">
+      <!-- <div class="input-container-btn">
         <input type=""  class="back-btn " value="Voltar">
         <input type="submit" class="submit-btn" value="Continuar">
+      </div> -->
+      <div class="input-container-btn">
+        <button type="button" @click="prevStep">
+          Prev
+        </button>
+        <button type="button" class="submit-btn" @click="nextStep">
+          Next
+        </button>
       </div>
     </form>
   </div>
