@@ -25,7 +25,7 @@
         <button type="button" @click="prevStep">
           Prev
         </button>
-        <button type="button" @click="nextStep">
+        <button type="button" class="submit-btn" @click="nextStep">
           Next
         </button>
       </div>
@@ -49,7 +49,7 @@
     },
     methods: {
       nextStep () {
-        this.$emit('step', 3)
+        this.$emit('step', 4)
       },
       prevStep () {
         this.$emit('step', 1);
