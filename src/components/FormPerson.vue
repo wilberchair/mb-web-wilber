@@ -1,0 +1,196 @@
+<template>
+  <Step current="2" />
+  <h1>Pessoa Física</h1>
+  
+  <div>{{ person }}</div>
+  <div>{{ step }}</div>
+
+  <div>
+    <form id="person-form">
+      <div class="input-container">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="name" v-model="person.name" placeholder="Digite o seu Nome">
+
+        <label for="nome">CPF</label>
+        <input type="text" id="cpf" name="cpf" v-model="person.cpf" placeholder="Digite o seu CPF">
+
+        <label for="nome">Data de Nascimento</label>
+        <input type="text" id="birth-date" name="birth-date" v-model="person.birth" placeholder="Data de Nascimento">
+
+        <label for="nome">Telefone</label>
+        <input type="text" id="phone" name="phone" v-model="person.phone" placeholder="Telefone">
+      </div>
+
+      <div class="input-container-btn">
+        <button type="button" @click="prevStep">
+          Prev
+        </button>
+        <button type="button" @click="nextStep">
+          Next
+        </button>
+      </div>
+    </form>
+  </div>
+</template>
+
+<script>
+  import Step from "../components/Step/Step.vue";
+  
+  export default {
+    name:"FormPerson",
+    // data(){
+    //   return {
+    //     teste: this.person,
+    //   }
+    // },
+    props: {
+      person: Object,
+      step: Number,
+    },
+    methods: {
+      nextStep () {
+        this.$emit('step', 3)
+      },
+      prevStep () {
+        this.$emit('step', 1);
+      },
+      // submitForm () {
+      //   alert('Form Submitted!\n' + JSON.stringify(this.form, null, 2));
+      // },
+    }
+  }
+</script>
+
+<style lang="scss">
+@import '../assets/style/variables';
+@import '../assets/style/_mixins';
+  #person-form {
+    /* max-width: 400px; */
+    margin: 0 auto;
+  }
+
+  .input-container {
+    // display: flex;
+    // flex-direction: column;
+    // margin-bottom: 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    label {
+        margin-bottom: 0.3rem;
+        text-align: left;
+    }
+
+    input {
+        border-radius: 5px;
+        border: 2px solid;
+        border-color: $color-secondary;
+        padding: 5px;
+        font-size: 16px;
+        height: 1.5rem; 
+        
+        &:hover {
+            border-color: $color-black;
+        }
+        &.error {
+            border-color: red;
+            background: #fff2f2;
+            &:hover {
+                border-color: red;
+                background: #fff2f2
+            }
+        }
+
+        &::placeholder {
+            color: #bbb;
+        }
+    }
+
+    .radio-container {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .submit-btn {
+      @include transition(all, 0.3s);
+
+      border-radius: 5px;
+      background-color: $color-primary;
+      width: 100%;
+      font-size: 0.6rem;
+      height: 1.5rem;
+      border: 0;
+      cursor: pointer;
+
+      color: $color-white;
+
+      &:hover {
+          background-color: $color-black;
+      }
+
+      &[disabled] {
+          background-color: $color-secondary;
+          cursor: text;
+      }
+
+      &.secondary {
+          background-color: $color-white;
+          color: $color-primary;
+          border: 2px solid  $color-primary;
+
+          &:hover {
+              color: $color-black;
+              border: 2px solid  $color-black;
+          }
+      }
+    }
+  }
+
+  .input-container-btn {
+    display: flex;
+    flex-direction: row;
+
+    .submit-btn {
+      @include transition(all, 0.3s);
+
+      border-radius: 5px;
+      background-color: $color-primary;
+      width: 100%;
+      font-size: 0.6rem;
+      height: 1.5rem;
+      border: 0;
+      cursor: pointer;
+
+      color: $color-white;
+
+      &:hover {
+          background-color: $color-black;
+      }
+
+      &[disabled] {
+          background-color: $color-secondary;
+          cursor: text;
+      }
+
+      &.secondary {
+          background-color: $color-white;
+          color: $color-primary;
+          border: 2px solid  $color-primary;
+
+          &:hover {
+              color: $color-black;
+              border: 2px solid  $color-black;
+          }
+      }
+    }
+  }
+
+  // label {
+  //   font-weight: bold;
+  //   margin-bottom: 5px;
+  //   color: #222;
+  //   text-align: left;
+  // }
+
+</style>
