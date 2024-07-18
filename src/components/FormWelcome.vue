@@ -43,9 +43,9 @@
         <FormLegalPerson :person="form" @step="newStep" />
       </div>
 
-      <!-- <div v-if="step === 3">
-        Pessoa Jurídica
-      </div> -->
+      <div v-if="step === 4">
+        <Password :person="form" @step="newStep" />
+      </div>
     </form>
   </div>
 </template>
@@ -54,10 +54,11 @@
   import Step from "../components/Step/Step.vue";
   import FormPerson from './FormPerson.vue';
   import FormLegalPerson from './FormLegalPerson.vue'
+  import Password from './Password.vue'
   
   export default {
     name:"FormWelcome",
-    components: {Step, FormPerson, FormLegalPerson},
+    components: {Step, FormPerson, FormLegalPerson, Password},
     data(){
       return {
         step: 1,
