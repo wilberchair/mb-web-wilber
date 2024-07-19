@@ -26,7 +26,7 @@
         <label for="senha">Senha</label>
         <input type="text" id="senha" name="senha" v-model="person.password" placeholder="Digite sua Senha">
         
-        <div class="input-container">
+        <div class="block-buttons">
           <button type="button" class="action-button secondary" @click="prevStep">
             Voltar
           </button>
