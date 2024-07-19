@@ -1,5 +1,23 @@
-# Vue 3 + Vite
+# Desafio MB-WEB
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Clonando e executando em sua máquina
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+### Pré-requisitos
+
+- Node JS (versão v16.18.0) - pode baixar pelo site: https://nodejs.org/en
+ou utilizar o NVM
+
+- Visual studio Code ou qualquer outro editor de código. link para vscode: 
+https://code.visualstudio.com/download
+
+Para baixar o projeto:
+
+git clone https://github.com/wilberchair/mb-web-wilber.git
+
+cd mb-web-wilber
+
+### Instalando as dependências
+npm i
+
+### Para rodar o projeto
+npm run dev
