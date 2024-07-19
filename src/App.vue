@@ -1,14 +1,14 @@
 <template>
-  <FormWelcome />
+  <FormPrincipal />
 </template>
 
 <script>
-  import FormWelcome from './components/FormWelcome.vue'
+  import FormPrincipal from './components/FormPrincipal.vue'
 
   export default {
     name: "",
     components: {
-      FormWelcome
+      FormPrincipal
     },
     props: ['current']
   }

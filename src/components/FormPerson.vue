@@ -1,11 +1,13 @@
 <template>
-  <Step current="2" />
-  <h1>Pessoa Física</h1>
+  <!-- <Step current="2" />
+  <h1>Pessoa Física</h1> -->
   
   <div>{{ person }}</div>
   <div>{{ step }}</div>
 
+  <Step current="2" />
   <div>
+    <h1>Pessoa Física</h1>
     <form id="person-form">
       <div class="input-container">
         <label for="nome">Nome</label>
@@ -19,16 +21,17 @@
 
         <label for="nome">Telefone</label>
         <input type="text" id="phone" name="phone" v-model="person.phone" placeholder="Telefone">
+        
+        <div class="block-buttons">
+          <button type="button" class="action-button secondary" @click="prevStep">
+            Voltar
+          </button>
+          <button type="button" class="action-button" @click="nextStep">
+            Continuar
+          </button>
+        </div>
       </div>
 
-      <div class="input-container-btn">
-        <button type="button" @click="prevStep">
-          Prev
-        </button>
-        <button type="button" class="submit-btn" @click="nextStep">
-          Next
-        </button>
-      </div>
     </form>
   </div>
 </template>
@@ -38,159 +41,23 @@
   
   export default {
     name:"FormPerson",
-    // data(){
-    //   return {
-    //     teste: this.person,
-    //   }
-    // },
     props: {
       person: Object,
       step: Number,
     },
     methods: {
       nextStep () {
-        this.$emit('step', 4)
+        this.$emit('step', 4);
       },
       prevStep () {
         this.$emit('step', 1);
       },
-      // submitForm () {
-      //   alert('Form Submitted!\n' + JSON.stringify(this.form, null, 2));
-      // },
     }
   }
 </script>
 
 <style lang="scss">
-@import '../assets/style/variables';
-@import '../assets/style/_mixins';
-  #person-form {
-    /* max-width: 400px; */
-    margin: 0 auto;
-  }
-
-  .input-container {
-    // display: flex;
-    // flex-direction: column;
-    // margin-bottom: 20px;
-
-    display: flex;
-    flex-direction: column;
-
-    label {
-        margin-bottom: 0.3rem;
-        text-align: left;
-    }
-
-    input {
-        border-radius: 5px;
-        border: 2px solid;
-        border-color: $color-secondary;
-        padding: 5px;
-        font-size: 16px;
-        height: 1.5rem; 
-        
-        &:hover {
-            border-color: $color-black;
-        }
-        &.error {
-            border-color: red;
-            background: #fff2f2;
-            &:hover {
-                border-color: red;
-                background: #fff2f2
-            }
-        }
-
-        &::placeholder {
-            color: #bbb;
-        }
-    }
-
-    .radio-container {
-      display: flex;
-      justify-content: space-around;
-    }
-
-    .submit-btn {
-      @include transition(all, 0.3s);
-
-      border-radius: 5px;
-      background-color: $color-primary;
-      width: 100%;
-      font-size: 0.6rem;
-      height: 1.5rem;
-      border: 0;
-      cursor: pointer;
-
-      color: $color-white;
-
-      &:hover {
-          background-color: $color-black;
-      }
-
-      &[disabled] {
-          background-color: $color-secondary;
-          cursor: text;
-      }
-
-      &.secondary {
-          background-color: $color-white;
-          color: $color-primary;
-          border: 2px solid  $color-primary;
-
-          &:hover {
-              color: $color-black;
-              border: 2px solid  $color-black;
-          }
-      }
-    }
-  }
-
-  .input-container-btn {
-    display: flex;
-    flex-direction: row;
-
-    .submit-btn {
-      @include transition(all, 0.3s);
-
-      border-radius: 5px;
-      background-color: $color-primary;
-      width: 100%;
-      font-size: 0.6rem;
-      height: 1.5rem;
-      border: 0;
-      cursor: pointer;
-
-      color: $color-white;
-
-      &:hover {
-          background-color: $color-black;
-      }
-
-      &[disabled] {
-          background-color: $color-secondary;
-          cursor: text;
-      }
-
-      &.secondary {
-          background-color: $color-white;
-          color: $color-primary;
-          border: 2px solid  $color-primary;
-
-          &:hover {
-              color: $color-black;
-              border: 2px solid  $color-black;
-          }
-      }
-    }
-  }
-
-  // label {
-  //   font-weight: bold;
-  //   margin-bottom: 5px;
-  //   color: #222;
-  //   text-align: left;
-  // }
-
+  @import '../assets/style/variables';
+  @import '../assets/style/_mixins';
+  @import '../assets/style/style.scss';
 </style>
