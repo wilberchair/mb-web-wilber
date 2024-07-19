@@ -1,0 +1,84 @@
+
+#person-form {
+  max-width: $max-width;
+  margin: 0 auto;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    margin-bottom: 0.3rem;
+    text-align: left;
+  }
+
+  input {
+    border-radius: 5px;
+    border: 2px solid;
+    border-color: $color-secondary;
+    padding: 5px;
+    font-size: 16px;
+    height: 1.5rem; 
+      
+    &:hover {
+        border-color: $color-black;
+    }
+    &.error {
+        border-color: red;
+        background: #fff2f2;
+        &:hover {
+            border-color: red;
+            background: #fff2f2
+        }
+    }
+
+    &::placeholder {
+        color: #bbb;
+    }
+  }
+
+  .radio-container {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .block-buttons {
+    display: flex;
+    margin: 1rem 0;
+
+    .action-button {
+      @include transition(all, 0.3s);
+  
+      border-radius: 5px;
+      background-color: $color-primary;
+      border: 0;
+      color: $color-white;
+      cursor: pointer;
+      font-size: 0.6rem;
+      height: 1.5rem;
+      width: 100%;
+  
+      &:hover {
+        background-color: $color-black;
+      }
+  
+      &[disabled] {
+        background-color: $color-secondary;
+        cursor: text;
+      }
+  
+      &.secondary {
+        background-color: $color-white;
+        border: 2px solid  $color-primary;
+        color: $color-primary;
+        margin-right: 1rem;
+
+        &:hover {
+          border: 2px solid  $color-black;
+          color: $color-black;
+        }
+      }
+    }
+  }
+}
