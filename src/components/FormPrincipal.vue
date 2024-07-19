@@ -1,16 +1,13 @@
 <template>
-  <!-- <Step current="1" />
-  <h1>Seja bem vindo(a)</h1> -->
-  <div>{{form}}</div>
   <div>
     <form id="person-form" @submit.prevent="submitForm">
+      <Step :current="step" />
       <div v-if="step === 1" class="form-group">
-        <Step current="1" />
         <h1>Seja bem vindo(a)</h1>
         <div class="input-container">
           <label for="email">Endereço de e-mail</label>
-          <input v-model="form.email" type="email" id="email" name="email" placeholder="Digite o seu Email" @blur="validateEmail" />
-          <div v-if="!form.email && error" class="error">
+          <input v-model="form.email" type="email" id="email" name="email" placeholder="Digite o seu Email" @keyup="validateEmail" />
+          <div v-if="error" class="error">
             Preencha seu e-mail corretamente
           </div>
 
@@ -28,26 +25,31 @@
             Escolha o tipo de regime
           </div>
           <div class="block-buttons">
-            <button v-if="step === 1" type="button" class="action-button" @click="nextStep">
-              Continuar
-            </button>
+            <template v-if="step === 1">
+              <button v-if="error" type="button" class="action-button block">
+                Continuar
+              </button>
+              <button v-else type="button" class="action-button" @click="nextStep">
+                Continuar
+              </button>
+            </template>
           </div>
         </div>
       </div>
 
-      <div v-if="step === 2">
+      <div v-if="step === 2 && isPf && !error">
         <FormPerson :person="form" @step="newStep" />
       </div>
 
-      <div v-if="step === 3">
+      <div v-if="step === 2 && !isPf && !error">
         <FormLegalPerson :person="form" @step="newStep" />
       </div>
 
-      <div v-if="step === 4">
+      <div v-if="step === 3">
         <Password :person="form" @step="newStep" />
       </div>
 
-      <div v-if="step === 5">
+      <div v-if="step === 4">
         <ReviewPage :person="form" @step="newStep" />
       </div>
     </form>
@@ -60,7 +62,7 @@
   import FormLegalPerson from './FormLegalPerson.vue'
   import Password from './Password.vue'
   import ReviewPage from './ReviewPage.vue'
-  import UTILS from "../utils/utils";
+  import HELPERS from "../helpers/helpers";
   
   export default {
     name:"FormWelcome",
@@ -69,6 +71,7 @@
       return {
         step: 1,
         error: false,
+        isPf: false,
         form: {
           email: '',
           person: '',
@@ -83,34 +86,36 @@
         }
       }
     },
-
     methods: {
       validateEmail() {
-      if(UTILS.validateEmail(this.form.email)) {
-        console.log('ok email')
-        this.error = true;
-      } else {
-        console.log('erro email')
-        this.error = false;
-      }
-    },
-      nextStep () {
-        this.error = false;
-        if ((this.step === 1 && !this.form.email) ||(this.step === 1 && !this.form.person)) {
-          console.log('IF>>>');
+        if(HELPERS.validateEmail(this.form.email)) {
+          console.log('ok email')
+          this.error = false;
+        } else {
+          console.log('erro email')
           this.error = true;
-        } else if (this.form.person === 'physicalPerson') {
-          this.step++;
-        } else if (this.form.person === 'legalPerson') {
-          this.step = 3;
         }
+      },
+      validatePerson() {
+        console.log('validatePerson')
+        return (this.step === 1 && this.form.person)
+      },
+      nextStep () {
+        this.validateEmail();
+
+        if(!this.error) {
+          if (this.form.person === 'physicalPerson') {
+            this.step++;
+            this.isPf = true;
+          } else if (this.form.person === 'legalPerson') {
+            this.isPf = false;
+            this.step++;
+          }
+        }  
       },
       newStep (event) {
         this.step = event;
       },
-      // submitForm () {
-      //   alert('Form Submitted!\n' + JSON.stringify(this.form, null, 2));
-      // },
     }
   }
 
@@ -118,6 +123,5 @@
 
 <style lang="scss">
   @import '../assets/style/variables';
-  @import '../assets/style/_mixins';
   @import '../assets/style/style.scss';
 </style>

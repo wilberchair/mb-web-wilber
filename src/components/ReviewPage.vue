@@ -1,10 +1,5 @@
 <template>
-  <Step current="5" />
   <h1>Revise suas informações</h1>
-
-  <div>{{ person }}</div>
-  <div>{{ step }}</div>
-
   <div>
     <form id="person-form">
       <div class="input-container">
@@ -63,6 +58,5 @@
 
 <style lang="scss">
   @import '../assets/style/variables';
-  @import '../assets/style/_mixins';
   @import '../assets/style/style.scss';
 </style>

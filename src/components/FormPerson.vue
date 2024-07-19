@@ -1,11 +1,4 @@
 <template>
-  <!-- <Step current="2" />
-  <h1>Pessoa Física</h1> -->
-  
-  <div>{{ person }}</div>
-  <div>{{ step }}</div>
-
-  <Step current="2" />
   <div>
     <h1>Pessoa Física</h1>
     <form id="person-form">
@@ -14,7 +7,7 @@
         <input type="text" id="nome" name="name" v-model="person.name" placeholder="Digite o seu Nome">
 
         <label for="nome">CPF</label>
-        <input type="text" id="cpf" name="cpf" v-model="person.cpf" placeholder="Digite o seu CPF">
+        <input type="text" id="cpf" name="cpf" v-model="person.cpf" placeholder="Digite o seu CPF" @blur="validateCPF">
 
         <label for="nome">Data de Nascimento</label>
         <input type="text" id="birth-date" name="birth-date" v-model="person.birth" placeholder="Data de Nascimento">
@@ -37,8 +30,8 @@
 </template>
 
 <script>
-  import Step from "../components/Step/Step.vue";
-  
+  import HELPERS from "../helpers/helpers";
+
   export default {
     name:"FormPerson",
     props: {
@@ -46,8 +39,18 @@
       step: Number,
     },
     methods: {
+      validateCPF() {
+        if(HELPERS.validateCPF(this.person.cpf)) {
+          console.log('ok cpf')
+          this.error = false;
+        } else {
+          console.log('erro cpf')
+          this.error = true;
+        }
+      },
       nextStep () {
-        this.$emit('step', 4);
+        
+        this.$emit('step', 3);
       },
       prevStep () {
         this.$emit('step', 1);
@@ -58,6 +61,5 @@
 
 <style lang="scss">
   @import '../assets/style/variables';
-  @import '../assets/style/_mixins';
   @import '../assets/style/style.scss';
 </style>

@@ -39,7 +39,7 @@
     },
     methods: {
       nextStep () {
-        this.$emit('step', 4);
+        this.$emit('step', 3);
       },
       prevStep () {
         this.$emit('step', 1);
@@ -50,6 +50,5 @@
 
 <style lang="scss">
   @import '../assets/style/variables';
-  @import '../assets/style/_mixins';
   @import '../assets/style/style.scss';
 </style>

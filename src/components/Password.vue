@@ -1,5 +1,4 @@
 +<template>
-  <Step current="4" />
   <h1>Senha de acesso</h1>
 
   <div>
@@ -45,6 +44,5 @@
 
 <style lang="scss">
   @import '../assets/style/variables';
-  @import '../assets/style/_mixins';
   @import '../assets/style/style.scss';
 </style>
