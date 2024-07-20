@@ -77,9 +77,11 @@
           person: '',
           name: '',
           cpf: '',
+          cnpj: '',
           birth: '',
           phone: '',
           password: '',
+          opening: '',
         },
         steps: {
           currentStep: '',

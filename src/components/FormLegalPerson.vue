@@ -5,16 +5,16 @@
   <div>
       <div class="input-container">
         <label for="nome">Nome</label>
-        <input type="text" id="nome" name="name" v-model="nome" placeholder="Digite o seu Nome">
+        <input type="text" id="nome" name="name" v-model="person.name" placeholder="Digite o seu Nome">
 
         <label for="nome">CNPJ</label>
-        <input type="text" id="cnpj" name="cnpj" v-model="cnpj" placeholder="Digite o seu CNPJ">
+        <input type="text" id="cnpj" name="cnpj" v-model="person.cnpj" placeholder="Digite o seu CNPJ">
 
         <label for="nome">Data da Abertura</label>
-        <input type="text" id="opening-date" name="opening-date" v-model="opening" placeholder="Data da Abertura">
+        <input type="text" id="opening-date" name="opening-date" v-model="person.opening" placeholder="Data da Abertura">
 
         <label for="nome">Telefone</label>
-        <input type="text" id="phone" name="phone" v-model="phone" placeholder="Telefone">
+        <input type="text" id="phone" name="phone" v-model="person.phone" placeholder="Telefone">
       </div>
 
       <div class="input-container">
