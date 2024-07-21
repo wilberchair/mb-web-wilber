@@ -85,6 +85,10 @@ const HELPERS = {
         cnpjValue=cnpjValue.replace(/(\d{4})(\d)/,"$1-$2")             
         return cnpjValue
     },
+    // cpfCnpjMask: (cpfCnpjMask) => {
+    //     const validateCpfCnpj = /(^\d{3}\.\d{3}\.\d{3}\-\d{2}$)|(^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$)/;
+    //     cpfCnpjMask=cpfCnpjMask.replace(validateCpfCnpj, "");
+    // },
     phoneMask: (value) => {
         if (!value) return ""
         value = value.replace(/\D/g,'')
