@@ -1,28 +1,29 @@
 <template>
+  {{ isPf }}
   <div>
     <form id="person-form" @submit.prevent="submitForm">
       <Step :current="step" />
-      <div v-if="step === 1" class="form-group">
-        <h1>Seja bem vindo(a)</h1>
-        <div class="input-container">
-          <label for="email">Endereço de e-mail</label>
-          <input v-model="form.email" type="email" id="email" name="email" placeholder="Digite o seu Email" @keyup="validateEmail" />
+      <div v-if="step === 1">
+        <h1 class="person-title">Seja bem vindo(a)</h1>
+        <div class="form-container">
+          <label class="form-label" for="email">Endereço de e-mail</label>
+          <input class="form-input" v-model="form.email" type="email" id="email" name="email" placeholder="Digite o seu Email" @keyup="validateEmail" />
           <div v-if="error" class="error">
-            Preencha seu e-mail corretamente
+            *Preencha seu e-mail corretamente
           </div>
 
           <div class="radio-container">
-            <label for="physicalPerson">
-              <input id="physicalPerson" type="radio" v-model="form.person" value="physicalPerson" name="select-person" />
+            <label class="form-label radio-person" for="physicalPerson">
+              <input class="form-input-radio" id="physicalPerson" type="radio" v-model="form.person" value="physicalPerson" name="select-person" />
               <span>Pessoa Física</span>
             </label>
-            <label for="legalPerson">
-              <input id="legalPerson" type="radio" v-model="form.person" value="legalPerson" name="select-person" />
+            <label class="form-label radio-person" for="legalPerson">
+              <input class="form-input-radio" id="legalPerson" type="radio" v-model="form.person" value="legalPerson" name="select-person" />
               <span>Pessoa Jurídica</span>
             </label>
           </div>
           <div v-if="!form.person && error" class="error">
-            Escolha o tipo de regime
+            *Escolha o tipo de regime
           </div>
           <div class="block-buttons">
             <template v-if="step === 1">
@@ -100,12 +101,12 @@
       },
       validatePerson() {
         console.log('validatePerson')
-        return (this.step === 1 && this.form.person)
+        return (this.step === 1 && this.form.person);
       },
       nextStep () {
         this.validateEmail();
 
-        if(!this.error) {
+        // if(!this.error) {
           if (this.form.person === 'physicalPerson') {
             this.step++;
             this.isPf = true;
@@ -113,7 +114,7 @@
             this.isPf = false;
             this.step++;
           }
-        }  
+        // }  
       },
       newStep (event) {
         this.step = event;
