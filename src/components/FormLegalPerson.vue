@@ -66,12 +66,10 @@
         }
       },
       validateCnpj() {
-        // console.log('valildate CNPJ>>>', this.person.cnpj.replace('.', '').replace('/', '').replace('-', '').replace('.', ''))
-        if(HELPERS.validateCNPJ(this.person.cnpj)) {
-          console.log('ok cnpj');
+        const clearCharacters = this.person.cnpj.replace('.', '').replace('/', '').replace('-', '').replace('.', '');
+        if(clearCharacters.length === 14) {
           this.error.cnpj = false;
         } else {
-          console.log('erro cnpj')
           this.error.cnpj = true;
         }
       },
