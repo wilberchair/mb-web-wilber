@@ -49,26 +49,6 @@ const HELPERS = {
 
         return true;
     },
-    validateCNPJ: (cnpj) => {
-        var validateNumbers = [ 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 ]
-        var cnpjReplace = String(cnpj).replace(/[^\d]/g, '')
-        
-        if(cnpjReplace.length !== 14)
-            return false
-    
-        if(/0{14}/.test(cnpjReplace))
-            return false
-    
-        for (var i = 0, n = 0; i < 12; n += cnpjReplace[i] * validateNumbers[++i]);
-        if(cnpjReplace[12] != (((n %= 11) < 2) ? 0 : 11 - n))
-            return false
-    
-        for (var i = 0, n = 0; i <= 12; n += cnpjReplace[i] * validateNumbers[i++]);
-        if(cnpjReplace[13] != (((n %= 11) < 2) ? 0 : 11 - n))
-            return false
-    
-        return true
-    },
     cpfMask: (cpfValue) => {
         cpfValue=cpfValue.replace(/\D/g,"")                    
         cpfValue=cpfValue.replace(/(\d{3})(\d)/,"$1.$2")       
@@ -85,27 +65,12 @@ const HELPERS = {
         cnpjValue=cnpjValue.replace(/(\d{4})(\d)/,"$1-$2")             
         return cnpjValue
     },
-    // cpfCnpjMask: (cpfCnpjMask) => {
-    //     const validateCpfCnpj = /(^\d{3}\.\d{3}\.\d{3}\-\d{2}$)|(^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$)/;
-    //     cpfCnpjMask=cpfCnpjMask.replace(validateCpfCnpj, "");
-    // },
     phoneMask: (value) => {
         if (!value) return ""
         value = value.replace(/\D/g,'')
         value = value.replace(/(\d{2})(\d)/,"($1) $2")
         value = value.replace(/(\d)(\d{4})$/,"$1-$2")
         return value
-    },
-    dateMask(dateValue){
-
-        var value=dateValue.replace(/\D/g,"");
-        
-        value=value.replace(/(\d{2})(\d)/,"$1/$2") 
-        
-        value=value.replace(/(\d{2})(\d)/,"$1/$2") 
-        
-        return value
-        
     }
 }
 
