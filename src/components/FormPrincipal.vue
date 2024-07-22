@@ -1,60 +1,52 @@
 <template>
-  {{ isPf }}
-  <div>
-    <form id="person-form" @submit.prevent="submitForm">
-      <Step :current="step" />
-      <div v-if="step === 1">
-        <h1 class="person-title">Seja bem vindo(a)</h1>
-        <div class="form-container">
-          <label class="form-label" for="email">Endereço de e-mail</label>
-          <input class="form-input" v-model="form.email" type="email" id="email" name="email" placeholder="Digite o seu Email" @keyup="validateEmail" />
-          <div v-if="error" class="error">
-            *Preencha seu e-mail corretamente
-          </div>
+  <form id="person-form" @submit.prevent="submitForm">
+    <Step :current="step" />
+    <div v-if="step === 1">
+      <h1 class="person-title">Seja bem vindo(a)</h1>
+      <div class="form-container">
+        <label class="form-label" for="email">Endereço de e-mail</label>
+        <input class="form-input" v-model="form.email" type="email" id="email" name="email" placeholder="Digite o seu Email" @keyup="validateEmail" />
+        <div v-if="error.email" class="error">
+          *Preencha seu e-mail corretamente
+        </div>
 
-          <div class="radio-container">
-            <label class="form-label radio-person" for="physicalPerson">
-              <input class="form-input-radio" id="physicalPerson" type="radio" v-model="form.person" value="physicalPerson" name="select-person" />
-              <span>Pessoa Física</span>
-            </label>
-            <label class="form-label radio-person" for="legalPerson">
-              <input class="form-input-radio" id="legalPerson" type="radio" v-model="form.person" value="legalPerson" name="select-person" />
-              <span>Pessoa Jurídica</span>
-            </label>
-          </div>
-          <div v-if="!form.person && error" class="error">
-            *Escolha o tipo de regime
-          </div>
-          <div class="block-buttons">
-            <template v-if="step === 1">
-              <button v-if="error" type="button" class="action-button block">
-                Continuar
-              </button>
-              <button v-else type="button" class="action-button" @click="nextStep">
-                Continuar
-              </button>
-            </template>
-          </div>
+        <div class="radio-container">
+          <label class="form-label radio-person" for="physicalPerson">
+            <input class="form-input-radio" id="physicalPerson" type="radio" v-model="form.person" value="physicalPerson" name="select-person" />
+            <span>Pessoa Física</span>
+          </label>
+          <label class="form-label radio-person" for="legalPerson">
+            <input class="form-input-radio" id="legalPerson" type="radio" v-model="form.person" value="legalPerson" name="select-person" />
+            <span>Pessoa Jurídica</span>
+          </label>
+        </div>
+        <div v-if="error.person" class="error">
+          *Escolha o tipo de regime
+        </div>
+        <div class="block-buttons">
+          <button type="button" class="action-button" @click="nextStep">
+            Continuar
+          </button>
         </div>
       </div>
+    </div>
 
-      <div v-if="step === 2 && isPf && !error">
-        <FormPerson :person="form" @step="newStep" />
-      </div>
+    <div v-if="step === 2 && isPf && (!error.email && !error.person)">
+      <FormPerson :person="form" @step="newStep" />
+    </div>
 
-      <div v-if="step === 2 && !isPf && !error">
-        <FormLegalPerson :person="form" @step="newStep" />
-      </div>
+    <div v-if="step === 2 && !isPf && (!error.email && !error.person)">
+      <FormLegalPerson :person="form" @step="newStep" />
+    </div>
 
-      <div v-if="step === 3">
-        <Password :person="form" @step="newStep" />
-      </div>
+    <div v-if="step === 3">
+      <Password :person="form" @step="newStep" />
+    </div>
 
-      <div v-if="step === 4">
-        <ReviewPage :person="form" @step="newStep" />
-      </div>
-    </form>
-  </div>
+    <div v-if="step === 4">
+      <ReviewPage :person="form" @step="newStep" />
+    </div>
+  </form>
 </template>
 
 <script>
@@ -71,7 +63,10 @@
     data(){
       return {
         step: 1,
-        error: false,
+        error: {
+          email: false,
+          person: false,
+        },
         isPf: false,
         form: {
           email: '',
@@ -93,20 +88,25 @@
       validateEmail() {
         if(HELPERS.validateEmail(this.form.email)) {
           console.log('ok email')
-          this.error = false;
+          this.error.email = false;
         } else {
           console.log('erro email')
-          this.error = true;
+          this.error.email = true;
         }
       },
       validatePerson() {
         console.log('validatePerson')
-        return (this.step === 1 && this.form.person);
+        if(this.form.person) {
+          this.error.person = false
+        } else {
+          this.error.person = true
+        }
       },
       nextStep () {
         this.validateEmail();
+        this.validatePerson();
 
-        // if(!this.error) {
+        if(!this.error.person) {
           if (this.form.person === 'physicalPerson') {
             this.step++;
             this.isPf = true;
@@ -114,7 +114,7 @@
             this.isPf = false;
             this.step++;
           }
-        // }  
+        }  
       },
       newStep (event) {
         this.step = event;

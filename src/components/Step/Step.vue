@@ -1,6 +1,6 @@
 <template>
   <div class="step">
-    <h3>Etapa <span>{{ current }}</span> de 5</h3>
+    <h3>Etapa <span>{{ current }}</span> de 4</h3>
   </div>
 </template>
 

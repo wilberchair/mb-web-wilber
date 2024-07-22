@@ -14,12 +14,14 @@
       <label class="forma-label" for="nome">Telefone</label>
       <input class="form-input" type="text" id="phone" name="phone" v-model="person.phone" placeholder="Telefone" />
 
-      <button type="button" class="action-button secondary" @click="prevStep">
-        Voltar
-      </button>
-      <button type="button" class="action-button" @click="nextStep">
-        Continuar
-      </button>
+      <div class="block-buttons">
+        <button type="button" class="action-button secondary" @click="prevStep">
+          Voltar
+        </button>
+        <button type="button" class="action-button" @click="nextStep">
+          Continuar
+        </button>
+      </div>
     </div>
   </div>
 </template>
