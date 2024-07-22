@@ -4,7 +4,7 @@
     <label class="form-label" for="password">Sua senha</label>
     <input class="form-input" type="text" id="password" name="password" v-model="person.password" placeholder="Digite sua Senha" />
     <div v-if="error.password" class="error">
-      *Preencha uma senha
+      *Preencha uma Senha
     </div>
 
     <div class="block-buttons">
@@ -35,10 +35,8 @@
     methods: {
       validatePassword() {
         if(this.person.password.length > 0) {
-          console.log('ok pass')
           this.error.password = false;
         } else {
-          console.log('erro pass')
           this.error.password = true;
         }
       },

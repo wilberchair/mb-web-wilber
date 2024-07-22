@@ -20,7 +20,7 @@
     </div>
 
     <label class="form-label" for="nome">Telefone</label>
-    <input class="form-input" id="phone" name="phone" v-model="person.phone" placeholder="(xx)xxxxx-xxxx" @keyup="phoneMask" />
+    <input class="form-input" id="phone" name="phone" type="tel" v-model="person.phone" placeholder="(xx)xxxxx-xxxx" @keyup="phoneMask" />
     <div v-if="error.phone" class="error">
       *Preencha o Telefone corretamente
     </div>
@@ -59,46 +59,36 @@
     methods: {
       validateName() {
         if(this.person.name.length > 0) {
-          console.log('ok name')
           this.error.name = false;
         } else {
-          console.log('erro name')
           this.error.name = true;
         }
       },
       validateCpf() {
         if(HELPERS.validateCPF(this.person.cpf)) {
-          console.log('ok cpf');
           this.error.cpf = false;
         } else {
-          console.log('erro cpf')
           this.error.cpf = true;
         }
       },
       cpfMask(param) {
-        console.log(param);
         this.person.cpf = HELPERS.cpfMask(param.target.value);
       },
       validateBirth() {
         if(this.person.birth.length > 0) {
-          console.log('ok birth');
           this.error.birth = false;
         } else {
-          console.log('erro birth')
           this.error.birth = true;
         }
       },
       validatePhone() {
         if(this.person.phone.length > 0) {
-          console.log('ok phone');
           this.error.phone = false;
         } else {
-          console.log('erro phone')
           this.error.phone = true;
         }
       },
       phoneMask(param) {
-        console.log(param);
         this.person.phone = HELPERS.phoneMask(param.target.value);
       },
       nextStep () {

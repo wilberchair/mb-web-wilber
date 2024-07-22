@@ -87,15 +87,12 @@
     methods: {
       validateEmail() {
         if(HELPERS.validateEmail(this.form.email)) {
-          console.log('ok email')
           this.error.email = false;
         } else {
-          console.log('erro email')
           this.error.email = true;
         }
       },
       validatePerson() {
-        console.log('validatePerson')
         if(this.form.person) {
           this.error.person = false
         } else {
