@@ -42,7 +42,6 @@
         this.$emit('step', 3);
       },
       submitForm () {
-        console.log('FOMRULARIO', this.form);
         alert('Form Submitted!\n' + JSON.stringify(this.person, null, 2));
       }, 
     }
